@@ -21,22 +21,22 @@ router.get('/ruta', requireLogin, (req, res) => {
 
 
 //listar las tareas
-router.get('/', requireLogin, async (req,res)=>{
+/*router.get('/', async (req,res)=>{
     const users= await User.find();
     console.log(users);
     res.json(users);
 
-});
+});*/
 
 
 //buscar una tarea
-/*router.get('/:id', async (req,res)=>{
+router.get('/:id', async (req,res)=>{
     const task= await User.findById(req.params.id);
     console.log(task);
     res.json(tasks);
 
 });
-*/
+
 
 
 //alta
