@@ -1,0 +1,43 @@
+/* estilos.css */
+
+/* Estilos para el contenedor del error */
+.google-error-container {
+    text-align: center;
+    margin: 50px auto;
+    max-width: 600px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Estilos para el título del error */
+  .google-error-title {
+    font-size: 24px;
+    color: #dd4b39; /* Color rojo similar al de Google */
+  }
+  
+  /* Estilos para la imagen de error */
+  .google-error-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+  }
+  
+  /* Estilos para el mensaje de error */
+  .google-error-message {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #333; /* Color de texto principal */
+  }
+  
+  /* Estilos para el enlace de otra página */
+  .google-error-link {
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #4285f4; /* Color azul similar al de Google */
+    font-weight: bold;
+  }
+  
+  .google-error-link:hover {
+    text-decoration: underline; /* Efecto subrayado al pasar el ratón */
+  }
+  
