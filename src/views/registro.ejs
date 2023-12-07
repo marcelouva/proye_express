@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Ruta del archivo CSS -->
+    <style>
+        /* Estilos para la estructura de dos columnas */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #marco {
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .title-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #ccc;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .content-row {
+            display: flex;
+        }
+        .column-img {
+            flex: 1;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .column-form {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centrar verticalmente */
+            align-items: center; /* Centrar horizontalmente */
+        }
+        .login-form {
+            /* Estilos para el formulario de inicio de sesión */
+        }
+        /* Otros estilos... */
+    </style>
+</head>
+<body>
+    <div id="marco">
+        <div class="title-row">
+            <h2 class="title">Crear cuenta -></h2>
+        </div>
+        <div class="content-row">
+            <div class="column-img">
+                <img src="ingreso.png" alt="Imagen" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="column-form">
+                <form action="/registro" method="POST" class="login-form"> <!-- Agrega una clase al formulario -->
+                    <label for="username">Nombre de usuario:</label>
+                    <input type="text" id="name" name="name" required>
+                    <br>
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" required>
+                    <br>
+                    <button type="submit" class="login-button">Crear cuenta</button>
+                    <div>
+                       
+                    </div>
+            
+                </form>
+            
+                <a href="/landpage" class="register-link">a la página de inicio ya...!</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+

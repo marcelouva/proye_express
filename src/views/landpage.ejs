@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tu Landing Page al Estilo Gmail</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    /* Encabezado fijo */
+    header {
+      width: 100%;
+      background-color: #f1f1f1;
+      padding: 15px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Panel lateral estilo Gmail */
+    .sidebar {
+      width: 250px;
+      background-color: #3367d6; /* Color azul fuerte */
+      box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      overflow-y: auto;
+      color: #fff; /* Texto en color blanco */
+    }
+
+    /* Estilos para los elementos del panel lateral */
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .sidebar li {
+      padding: 10px 20px;
+      border-bottom: 1px solid #4b8dff; /* Color de separación */
+    }
+
+    .sidebar li:last-child {
+      border-bottom: none; /* Elimina la separación del último elemento */
+    }
+
+    /* Estilos para los enlaces */
+    .sidebar a {
+      color: #fff; /* Color del texto */
+      text-decoration: none;
+      display: block;
+    }
+
+    /* Estilo al pasar el ratón sobre los enlaces */
+    .sidebar a:hover {
+      background-color: #2557a7; /* Color de fondo al pasar el ratón */
+    }
+
+    /* Contenido principal */
+    main {
+      margin-left: 250px; /* Ancho del panel lateral */
+      padding-top: 60px; /* Altura del encabezado */
+      width: calc(100% - 250px); /* Ancho del contenido principal */
+    }
+
+    /* Resto de tu estilo... */
+  </style>
+</head>
+<body>
+  <!-- Encabezado fijo -->
+  <header>
+    <!-- Contenido del encabezado (por ejemplo, un logo o título) -->
+    <h1>Seguimiento alumnos</h1>
+  </header>
+
+  <!-- Panel lateral estilo Gmail -->
+  <div class="sidebar">
+    <ul>
+      <li><a href="#">Enlace 1</a></li>
+      <li><a href="#">Enlace 2</a></li>
+      <li><a href="#">Enlace 3</a></li>
+      <li><a href="#">Enlace 4</a></li>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- Contenido principal -->
+  <main>
+    <!-- Aquí va el contenido principal de tu página -->
+    <h1>Bienvenido a Mi Página</h1>
+    <p>Contenido principal aquí...</p>
+  </main>
+</body>
+</html>

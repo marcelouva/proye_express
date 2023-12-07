@@ -70,12 +70,16 @@ try {
 
 
     
+router.get('/landpage', async(req,res)=>{
+  res.render('landpage'); // Renderiza la vista 'index.ejs'
+
+});
 
 
 
 //alta
 router.get('/registro', async(req,res)=>{
-  res.render('register'); // Renderiza la vista 'index.ejs'
+  res.render('registro'); // Renderiza la vista 'index.ejs'
 
 });
 

@@ -33,7 +33,7 @@ app.use(session({
 
 //Routes
 
-//app.use('/api/tasks',require('./routes/task.routes'));
+app.use('/api/tasks',require('./routes/task.routes'));
 app.use('/',require('./routes/user.routes'));
 //app.use('/otra',require('./routes/other.routes'));
 
