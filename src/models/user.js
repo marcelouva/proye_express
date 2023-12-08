@@ -7,6 +7,8 @@ const bcrypt = require('bcrypt');
 const UserSchema = new Schema({
     name: { type: String, required: true },
     password: { type: String, required: true },
+    subjects: [{ type: Schema.Types.ObjectId, ref: 'Subject' }]
+
 });
 
 // Antes de guardar el usuario en la base de datos, hasheamos la contraseña

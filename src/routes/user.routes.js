@@ -68,10 +68,15 @@ try {
 });
 
 
+router.get('/administrar', requireLogin, async(req,res)=>{
+  res.render('administra'); // Renderiza la vista 'index.ejs'
+
+});
+
 
     
-router.get('/landpage', async(req,res)=>{
-  res.render('landpage'); // Renderiza la vista 'index.ejs'
+router.get('/landingpage', requireLogin, async(req,res)=>{
+  res.render('landingpage'); // Renderiza la vista 'index.ejs'
 
 });
 
@@ -127,18 +132,19 @@ router.post('/login', async (req, res) => {
         const isPasswordValid = await user.comparePassword(password);
         
         if (isPasswordValid) {
-          //----
           req.session.usuario = { id: 1, nombre: name };
-          //res.send('¡Inicio de sesión exitoso!');
-            
-          //----
-          res.json({ exists: true, message: 'Credenciales válidas' });
+          res.render('landingpage'); // Renderiza la vista 'index.ejs'
         } else {
-          res.json({ exists: true, message: 'Credenciales inválidas' });
-        }
+          const imageUrl = 'user_no_encontrado.png'; // Ruta de la imagen de error
+          const errorMessage = 'Credenciales inválidas.';
+          const link = 'login'; // Ruta de la otra página
+          res.render('error', { imageUrl, errorMessage, link });        }
       } else {
         // El usuario no fue encontrado
-        res.json({ exists: false, message: 'Usuario no encontrado' });
+        const imageUrl = 'user_no_encontrado.png'; // Ruta de la imagen de error
+        const errorMessage = 'El usuario no ha sido encontrado.!!';
+        const link = 'login'; // Ruta de la otra página
+        res.render('error', { imageUrl, errorMessage, link });
       }
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -157,7 +163,7 @@ router.get('/logout', (req, res) => {
       console.log(err);
     } else {
       // Redirigir al usuario a alguna página, por ejemplo, la página de inicio
-      res.json('sesion eliminada');
+      res.render('login'); // Renderiza la vista 'index.ejs'
     }
   });
 });
