@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tu Landing Page al Estilo Gmail</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
     body {
@@ -69,9 +68,18 @@
       background-color: #2557a7; /* Color de fondo al pasar el ratón */
     }
 
+    .frame {
+    border: 2px solid #ccc; /* Borde sólido de 2px con color gris */
+    padding: 20px; /* Espaciado interno */
+    margin-top: 20px; /* Espaciado externo superior */
+    font-size: 20px;
+
+    /* Otros estilos de diseño que desees agregar */
+}
+
     /* Estilos del contenido principal */
     main {
-      margin-left: 250px; /* Ancho del panel lateral */
+      margin-left: 300px; /* Ancho del panel lateral */
       padding-top: 60px; /* Altura del encabezado */
       width: calc(100% - 250px); /* Ancho del contenido principal */
     }
@@ -93,7 +101,7 @@
   <div class="sidebar">
     <ul>
       <!-- Tus enlaces -->
-      <li><a href="/administrar" onclick="cambiarContenido('administrar')">Administrar</a></li>
+      <li><a href="/administrar?name=<%= name %>" >Administrar</a></li>
       <li><a href="#" onclick="cambiarContenido('enlace4')">Enlace 4</a></li>
       <li><a href="/logout">Salir</a></li>
     </ul>
@@ -101,9 +109,13 @@
 
   <!-- Contenido principal -->
   <main id="mainContent">
-
+    <h1>  Usuario: <%= name %> </h1>  
+  
+    <div class="frame">
+      <!-- Contenido dentro del marco -->
+      <p>Aquí puedes colocar tu contenido adicional</p>
+  </div>
+  
   </main>
-
-
 </body>
 </html>

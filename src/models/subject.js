@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const {Schema}  = mongoose;
 
 const SubjectSchema = new Schema({
     id: { type: Number, required: true },
     name: { type: String, required: true },
-    course: { type: String, required: true }
+    course: { type: String, required: true },
+    activities: [{ type: Schema.Types.ObjectId, ref: 'Activity' }]
+
 });
 
 
@@ -20,8 +22,7 @@ SubjectSchema.pre('save', function(next) {
     next();
 });
 
-const User = mongoose.model('Subject', SubjectSchema);
+const Subject = mongoose.model('Subject', SubjectSchema);
 
 module.exports = Subject;
-
 
