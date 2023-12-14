@@ -101,7 +101,7 @@
   <div class="sidebar">
     <ul>
       <!-- Tus enlaces -->
-      <li><a href="/administrar?name=<%= name %>" >Administrar</a></li>
+      <li><a href="/profile" onclick="cambiarContenido('misdatos',event)">Mis datos</a></li>
       <li><a href="#" onclick="cambiarContenido('enlace4')">Enlace 4</a></li>
       <li><a href="/logout">Salir</a></li>
     </ul>
@@ -109,13 +109,24 @@
 
   <!-- Contenido principal -->
   <main id="mainContent">
-    <h1>  Usuario: <%= name %> </h1>  
+    
+    <h1>  Usuario: <%= username %> </h1>  
   
-    <div class="frame">
+    <div class="frame" id="seccion1">
       <!-- Contenido dentro del marco -->
-      <p>Aquí puedes colocar tu contenido adicional</p>
+      <p>Aquí puedes colocaraaaaaaaaaaaaaaaaaaaaaa tu contenido adicional</p>
   </div>
   
   </main>
+  <script>
+    function cambiarContenido(enlace,event) {
+      // Suponiendo que tienes diferentes contenidos asociados a cada enlace
+      if (enlace === 'misdatos') {
+        document.getElementById('seccion1').innerHTML = '<p>Este es el contenido para el Enlace 4.</p>';
+      } else {
+        // Puedes agregar más lógica para otros enlaces si es necesario
+      }
+    }
+  </script>
 </body>
 </html>

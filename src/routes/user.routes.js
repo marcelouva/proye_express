@@ -1,19 +1,80 @@
 const express = require('express');
 const session = require('express-session');
+const multer = require('multer');
+const path = require('path');
 
 const router = express.Router();
 const User = require('../models/user');
+const Subject = require('../models/subject');
 
 const requireLogin = require('../helpers/utils');
 
 //const requireLogin = require('../helpers/utils');
 //import { requireLogin } from '../helpers/utils';
 
+const activityController = require('../controllers/activityController');
+
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const destinationPath = path.join(__dirname, '../pdffiles/');
+    cb(null, destinationPath);
+  },
+  filename: function (req, file, cb) {
+    // Genera un nombre único para el archivo
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+// Crea la instancia de multer con la configuración de almacenamiento
+const upload = multer({ storage });
+
+// Manejador para la carga del archivo
+router.post('/actividades/alta', upload.single('archivoPDF'), (req, res) => {
+  // Obtiene la URL del archivo cargado
+  const fileUrl = req.file.path; // Obtener la ruta del archivo subido por multer
+  const nombre = req.body.nombre; // Acceder al campo 'nombre' del formulario
+  const descripcion = req.body.descripcion; // Acceder al campo 'descripcion' del formulario
+  const tags = req.body.tags; // Acceder al campo 'tags' del formulario
+  const urlArchivo = fileUrl; // Usar la ruta del archivo almacenado por multer
+  
+  console.log(fileUrl);
+  console.log(nombre);
+  console.log(descripcion);
+  console.log(tags);
+
+
+  
+  // Aquí puedes hacer lo que necesites con la URL del archivo (por ejemplo, guardarla en la base de datos)
+
+  // Continúa con el procesamiento del formulario...
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 router.get('/ruta', requireLogin, (req, res) => {
   res.send('¡Bienvenido a la ruta protegida de tareas!');
-});
+}); 
 
 
 
@@ -75,8 +136,10 @@ router.get('/administrar', requireLogin, async(req,res)=>{
 
 
     
-router.get('/landingpage', requireLogin, async(req,res)=>{
-  res.render('landingpage'); // Renderiza la vista 'index.ejs'
+router.get('/profile1', requireLogin, async(req,res)=>{
+  const nombre  = req.session.usuario.nombre;
+  console.log(">>>>"+nombre);
+  res.render('profile',{username:nombre}); // Renderiza la vista 'index.ejs'
 
 });
 
@@ -125,15 +188,21 @@ router.post('/login', async (req, res) => {
     try {
       const { name, password } = req.body;
   
-      const user = await User.findOne({ name });
-  
+      //const user = await User.findOne({ name });
+      const user = await User.findOne({ name }).populate('subjects').exec();
+
+
       if (user) {
         // El usuario existe en la base de datos, ahora comparamos las contraseñas
         const isPasswordValid = await user.comparePassword(password);
         
         if (isPasswordValid) {
           req.session.usuario = { id: 1, nombre: name };
-          res.render('landingpage'); // Renderiza la vista 'index.ejs'
+
+          const asignaturas = await user.subjects;
+          console.log("===>"+asignaturas);
+          res.render('profile1',{ username: name, documentos: asignaturas });
+         // res.render('profile1',{username:name},{documentos}); // Renderiza la vista 'index.ejs'
         } else {
           const imageUrl = 'user_no_encontrado.png'; // Ruta de la imagen de error
           const errorMessage = 'Credenciales inválidas.';
@@ -153,7 +222,18 @@ router.post('/login', async (req, res) => {
 
 
 
-
+router.get('/activities/:subjectId', async (req, res) => {
+  const subjectId = req.params.subjectId; // Obtenemos el ID de la asignatura desde la URL
+  try {
+    // Aquí debes escribir la lógica para buscar actividades por el ID de la asignatura
+    // Supongamos que tienes una función en tu controlador que realiza esta búsqueda
+    const activities = await actividadController.getActivitiesBySubjectId(subjectId);
+    res.render('actividades', { activities }); // Renderiza la vista de actividades con la lista obtenida
+  } catch (error) {
+    console.error('Error al obtener actividades:', error);
+    res.status(500).send('Error al obtener actividades');
+  }
+});
 
 router.get('/logout', (req, res) => {
   // Eliminar la sesión
@@ -169,7 +249,11 @@ router.get('/logout', (req, res) => {
 });
 
 
+router.get('/addactivity', requireLogin, async(req,res)=>{
+ 
+  res.render('activityview'); // Renderiza la vista 'index.ejs'
 
+});
 
 
 

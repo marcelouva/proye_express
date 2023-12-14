@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const {Schema}  = mongoose;
 
 const SubjectSchema = new Schema({
-    id: { type: Number, required: true },
+    id: { type: Number, required: true, unique: true  },
     name: { type: String, required: true },
     course: { type: String, required: true },
     activities: [{ type: Schema.Types.ObjectId, ref: 'Activity' }]

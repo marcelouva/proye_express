@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tu Landing Page al Estilo Gmail</title>
+
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    /* Estilos del encabezado fijo */
+    header {
+      width: 100%;
+      background-color: #f1f1f1;
+      padding: 15px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Estilos del panel lateral estilo Gmail */
+    .sidebar {
+      width: 150px;
+      background-color: #3367d6; /* Color azul fuerte */
+      box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      overflow-y: auto;
+      color: #fff; /* Texto en color blanco */
+    }
+
+    /* Estilos para los elementos del panel lateral */
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .sidebar li {
+      padding: 10px 20px;
+      border-bottom: 1px solid #4b8dff; /* Color de separación */
+    }
+
+    .sidebar li:last-child {
+      border-bottom: none; /* Elimina la separación del último elemento */
+    }
+
+    /* Estilos para los enlaces */
+    .sidebar a {
+      color: #fff; /* Color del texto */
+      text-decoration: none;
+      display: block;
+    }
+
+    /* Estilo al pasar el ratón sobre los enlaces */
+    .sidebar a:hover {
+      background-color: #2557a7; /* Color de fondo al pasar el ratón */
+    }
+
+    .frame {
+    border: 2px solid #ccc; /* Borde sólido de 2px con color gris */
+    padding: 20px; /* Espaciado interno */
+    margin-top: 20px; /* Espaciado externo superior */
+    font-size: 20px;
+
+    /* Otros estilos de diseño que desees agregar */
+}
+
+    /* Estilos del contenido principal */
+    main {
+      margin-left: 200px; /* Ancho del panel lateral */
+      padding-top: 60px; /* Altura del encabezado */
+      width: calc(100% - 250px); /* Ancho del contenido principal */
+    }
+
+    /* Resto de tus estilos... */
+
+    /* Estilos para el iframe */
+    #frameContent {
+      width: 100%;
+      height: 80vh;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  
+
+  <!-- Panel lateral estilo Gmail -->
+  <div class="sidebar">
+    <ul>
+      <!-- Tus enlaces -->
+      <li><a href="/profile" onclick="cambiarContenido('misdatos',event)">Mis datos</a></li>
+      <li><a href="#" onclick="cambiarContenido('enlace4')">Enlace 4</a></li>
+      <li><a href="/logout">Salir</a></li>
+    </ul>
+  </div>
+
+  <!-- Contenido principal -->
+  <main id="mainContent">
+    
+    <h1>  Usuario: <%= username %> </h1>  
+  
+    <div class="frame" id="seccion1">
+
+
+      <h2>Asignaturas</h2>
+      <div class="frame" id="seccion2">
+        <% if (documentos && documentos.length > 0) { %>
+          <ul>
+            <% documentos.forEach(documento => { %>
+              <li>
+                <strong>Id:</strong> <%= documento.id %> | 
+                <strong>Nombre:</strong> <%= documento.name %> | 
+                <strong>Curso:</strong> <%= documento.course %> | 
+                <a href="/activities/<%= documento._id %>">Ver Actividades</a>
+              </li>
+            <% }); %>
+          </ul>
+        <% } else { %>
+          <p>No hay documentos disponibles.</p>
+        <% } %>
+      </div>
+
+
+
+
+
+
+
+
+
+    </div>
+  
+  </main>
+  <script>
+    function cambiarContenido(enlace,event) {
+      // Suponiendo que tienes diferentes contenidos asociados a cada enlace
+      if (enlace === 'misdatos') {
+        document.getElementById('seccion1').innerHTML = '<p>Este es el contenido para el Enlace 4.</p>';
+      } else {
+        // Puedes agregar más lógica para otros enlaces si es necesario
+      }
+    }
+  </script>
+</body>
+</html>
