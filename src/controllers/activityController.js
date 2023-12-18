@@ -31,14 +31,23 @@ const activityController = {
 
   // Crear una nueva actividad
   createActivity: async (req, res) => {
-    const { name, description,tags} = req.body;
+    const { nombre, descripcion,tags} = req.body;
     const fileUrl = req.file.path; 
     try {
-      const newActivity = await Activity.create({ name, description,tags,fileUrl });
-      res.status(201).json(newActivity);
-    } catch (error) {
-      res.status(500).json({ error: 'Error al crear la actividad' });
-    }
+
+       const nuevaActividad = new Activity({
+        name: nombre,
+        description: descripcion,
+        tags: tags,
+        fileUrl: fileUrl
+      });
+      
+         const savedActivity = await nuevaActividad.save();
+        console.log('Actividad creada:', savedActivity);
+        
+     } catch (error) {
+      console.error('Error al crear la actividad:', error);
+      res.status(500).json({ error: 'Error al crear la actividad', details: error.message });    }
   },
 
   // Actualizar una actividad existente

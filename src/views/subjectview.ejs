@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asignaturas</title>
+
+  <!-- Estilos CSS -->
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    /* Estilos del encabezado fijo */
+    header {
+      width: 100%;
+      background-color: #f1f1f1;
+      padding: 15px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Estilos del panel lateral estilo Gmail */
+    .sidebar {
+      width: 250px;
+      background-color: #3367d6; /* Color azul fuerte */
+      box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      overflow-y: auto;
+      color: #fff; /* Texto en color blanco */
+    }
+
+    /* Estilos para los elementos del panel lateral */
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+    .input-box {
+    height: 35px;
+     width: 90%;
+  /* Otros estilos */
+   }
+    .sidebar li {
+      padding: 10px 20px;
+      border-bottom: 1px solid #4b8dff; /* Color de separación */
+    }
+
+    .sidebar li:last-child {
+      border-bottom: none; /* Elimina la separación del último elemento */
+    }
+
+    /* Estilos para los enlaces */
+    .sidebar a {
+      color: #fff; /* Color del texto */
+      text-decoration: none;
+      display: block;
+    }
+
+    /* Estilo al pasar el ratón sobre los enlaces */
+    .sidebar a:hover {
+      background-color: #2557a7; /* Color de fondo al pasar el ratón */
+    }
+
+    .frame {
+    border: 2px solid #ccc; /* Borde sólido de 2px con color gris */
+    padding: 20px; /* Espaciado interno */
+    margin-top: 20px; /* Espaciado externo superior */
+    font-size: 20px;
+    width: 90%;
+
+    /* Otros estilos de diseño que desees agregar */
+}
+
+    /* Estilos del contenido principal */
+    main {
+      margin-left: 300px; /* Ancho del panel lateral */
+      padding-top: 60px; /* Altura del encabezado */
+      width: calc(100% - 250px); /* Ancho del contenido principal */
+    }
+
+    /* Resto de tus estilos... */
+
+    /* Estilos para el iframe */
+    #frameContent {
+      width: 100%;
+      height: 80vh;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Panel lateral estilo Gmail -->
+  <div class="sidebar">
+    <ul>
+      <!-- Tus enlaces -->
+      <li><a href="/profile" onclick="cambiarContenido('misdatos',event)">Mis datos</a></li>
+      <li><a href="#" onclick="cambiarContenido('enlace4')">Enlace 4</a></li>
+      <li><a href="/logout">Salir</a></li>
+    </ul>
+  </div>
+
+  <!-- Contenido principal -->
+  <main id="mainContent">
+    <div class="frame" id="seccion1">
+      <h2> Alta de asignaturas </h2>
+    <!-- Formulario para dar de alta una actividad -->
+
+
+    <form action="/asignaturas/alta" method="POST" enctype="multipart/form-data" onsubmit="return validarFormulario()">
+      <label for="id">Id:</label>
+      <input type="number" id="id" name="id" required > &nbsp;&nbsp;
+            <label for="nombre">Nombre:</label>
+      <input type="text" id="name" name="name" required > &nbsp;&nbsp;
+      
+    <label for="curso">Curso:</label>
+    <input type="text" id="course" name="course" required><br><br>   
+      
+
+        <a href="/addactivity" onclick="navigateTo('/addactivity')">agregar actividades</a>
+      
+
+
+        <br><br>
+
+
+
+
+
+
+
+    
+      <button type="submit">Dar de Alta</button>
+
+
+
+
+    </form>
+
+    <script>
+        function navigateTo(url) {
+          // Evitar que el formulario se envíe cuando se hace clic en el enlace
+          event.preventDefault();
+      
+          // Obtener la URL del enlace y redirigir a esa página
+          window.location.href = url;
+        }
+      </script>
+      
+
+
+
+    <script>
+      function validarFormulario() {
+
+
+
+        const nombre = document.getElementById('nombre');
+        const id = document.getElementById('id');
+        const course = document.getElementById('course');
+    
+        // Eliminar espacios en blanco al inicio y al final de los campos
+        nombre.value = nombre.value.trim();
+        course.value = course.trim();
+       
+        // Escapar caracteres HTML (opcional)
+        nombre.value = escape(nombre.value);
+        course.value = escape(course.value);
+        
+        return true; // Retorna true para enviar el formulario o false para detenerlo
+      }
+    </script>
+
+
+
+    
+    
+    
+    </div>
+  
+  </main>
+
+
+
+
+  <!-- Script para cambiar el contenido -->
+  <script>
+    function cambiarContenido(enlace,event) {
+      // Suponiendo que tienes diferentes contenidos asociados a cada enlace
+      if (enlace === 'misdatos') {
+        document.getElementById('seccion1').innerHTML = '<p>Este es el contenido para el Enlace 4.</p>';
+      } else {
+        // Puedes agregar más lógica para otros enlaces si es necesario
+      }
+    }
+  </script>
+
+
+
+<h1>Cargar Subject</h1>
+<form action="/createSubject" method="POST">
+    <label for="subjectId">ID del Subject:</label>
+    <input type="text" id="subjectId" name="subjectId">
+
+    <label for="subjectName">Nombre del Subject:</label>
+    <input type="text" id="subjectName" name="subjectName">
+
+    <button type="submit">Crear Subject</button>
+</form>
+
+<h2>Crear Actividad</h2>
+<form action="/createActivity" method="POST">
+    <label for="activityId">ID de la Actividad:</label>
+    <input type="text" id="activityId" name="activityId">
+
+    <label for="activityName">Nombre de la Actividad:</label>
+    <input type="text" id="activityName" name="activityName">
+
+    <label for="subjectId">ID del Subject asociado:</label>
+    <input type="text" id="subjectId" name="subjectId">
+
+    <button type="submit">Crear Actividad</button>
+</form>
+
+
+
+
+
+</body>
+</html>

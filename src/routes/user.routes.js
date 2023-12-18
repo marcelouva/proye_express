@@ -32,17 +32,10 @@ const upload = multer({ storage });
 
 // Manejador para la carga del archivo
 router.post('/actividades/alta', upload.single('archivoPDF'), (req, res) => {
-  // Obtiene la URL del archivo cargado
-  const fileUrl = req.file.path; // Obtener la ruta del archivo subido por multer
-  const nombre = req.body.nombre; // Acceder al campo 'nombre' del formulario
-  const descripcion = req.body.descripcion; // Acceder al campo 'descripcion' del formulario
-  const tags = req.body.tags; // Acceder al campo 'tags' del formulario
-  const urlArchivo = fileUrl; // Usar la ruta del archivo almacenado por multer
-  
-  console.log(fileUrl);
-  console.log(nombre);
-  console.log(descripcion);
-  console.log(tags);
+  activityController.createActivity(req,res);
+  const mensaje = 'Se guardó correctamente la actividad".';
+  res.render('notification', { mensaje }); // Renderiza la plantilla EJS con el mensaje
+
 
 
   
@@ -255,6 +248,12 @@ router.get('/addactivity', requireLogin, async(req,res)=>{
 
 });
 
+
+router.get('/addsubject', requireLogin, async(req,res)=>{
+ 
+  res.render('subjectview'); // Renderiza la vista 'index.ejs'
+
+});
 
 
 module.exports = router;
